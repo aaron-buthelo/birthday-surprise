@@ -45,13 +45,14 @@
         .envelope {
             width: 200px;
             height: 120px;
-            background: #8B4513;
+            background: #f4f4f4;
             margin: 0 auto 30px;
-            border-radius: 15px;
+            border-radius: 5px;
             position: relative;
             cursor: pointer;
             transition: transform 0.3s ease;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 2px solid #ddd;
         }
 
         .envelope:active {
@@ -62,38 +63,55 @@
             animation: shake 0.5s ease-in-out;
         }
 
+        /* Envelope back flap (always visible) */
         .envelope::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
+            top: -1px;
+            left: -1px;
             width: 200px;
-            height: 60px;
-            background: #D2691E;
-            border-radius: 15px 15px 0 0;
-            transition: transform 0.8s ease;
-            transform-origin: bottom;
-            z-index: 2;
-            clip-path: polygon(0 100%, 50% 0, 100% 100%);
+            height: 120px;
+            background: #e8e8e8;
+            clip-path: polygon(0 0, 50% 60px, 100% 0, 100% 100%, 0 100%);
+            border-radius: 5px;
+            z-index: 1;
         }
 
-        .envelope.opening::before {
-            transform: rotateX(-180deg);
-        }
-
+        /* Envelope front flap (opens on click) */
         .envelope::after {
-            content: '💌';
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: -1px;
+            width: 200px;
+            height: 80px;
+            background: #D2691E;
+            clip-path: polygon(0 0, 50% 100%, 100% 0);
+            border-radius: 5px 5px 0 0;
+            transition: transform 0.8s ease;
+            transform-origin: top center;
+            z-index: 3;
+        }
+
+        .envelope.opening::after {
+            transform: rotateX(180deg);
+        }
+
+        /* Heart inside envelope */
+        .envelope-heart {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 2rem;
+            z-index: 2;
             transition: all 0.8s ease;
-            z-index: 1;
+            opacity: 0;
         }
 
-        .envelope.opening::after {
-            transform: translate(-50%, -50%) scale(1.5);
+        .envelope.opening .envelope-heart {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1.2);
             animation: glow 0.8s ease-in-out;
         }
 
@@ -161,7 +179,9 @@
     <div class="container">
         <h1>Something Special for Pragati</h1>
         <p class="message">A little surprise is waiting for you...</p>
-        <div class="envelope" onclick="openSurprise()"></div>
+        <div class="envelope" onclick="openSurprise()">
+            <div class="envelope-heart">💌</div>
+        </div>
         <p class="click-hint">Tap the envelope 💕</p>
         <p class="loading-message" id="loading-message">Opening your surprise... ✨</p>
     </div>
