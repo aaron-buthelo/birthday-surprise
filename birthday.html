@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Pragati! 🎉</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fad0c4 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .balloons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .balloon {
+            position: absolute;
+            font-size: 4rem;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .balloon:nth-child(1) { left: 5%; animation-delay: 0s; color: #ff6b6b; }
+        .balloon:nth-child(2) { left: 15%; animation-delay: 1s; color: #4ecdc4; }
+        .balloon:nth-child(3) { left: 75%; animation-delay: 2s; color: #45b7d1; }
+        .balloon:nth-child(4) { left: 85%; animation-delay: 3s; color: #f9ca24; }
+        .balloon:nth-child(5) { left: 95%; animation-delay: 4s; color: #6c5ce7; }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            padding: 50px 20px;
+            text-align: center;
+            animation: slideIn 2s ease-out;
+        }
+
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 50px;
+            margin: 0 auto;
+            max-width: 700px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(45deg, #e91e63, #ff5722, #ff9800, #4caf50, #2196f3, #9c27b0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            animation: rainbow 3s infinite;
+        }
+
+        .name {
+            font-size: 4rem;
+            color: #e91e63;
+            font-weight: bold;
+            margin: 20px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            animation: bounce 2s infinite;
+        }
+
+        .personal-message {
+            font-size: 1.4rem;
+            color: #333;
+            line-height: 1.8;
+            margin: 30px 0;
+            font-style: italic;
+        }
+
+        .love-notes {
+            background: linear-gradient(45deg, #ffeaa7, #fab1a0);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 5px solid #e17055;
+        }
+
+        .love-notes h3 {
+            color: #2d3436;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        .love-notes p {
+            color: #2d3436;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        .hearts {
+            font-size: 2.5rem;
+            margin: 20px 0;
+        }
+
+        .heart {
+            display: inline-block;
+            animation: heartbeat 1.5s ease-in-out infinite;
+            margin: 0 10px;
+        }
+
+        .heart:nth-child(2) { animation-delay: 0.3s; }
+        .heart:nth-child(3) { animation-delay: 0.6s; }
+
+        .surprise-btn {
+            background: linear-gradient(45deg, #e91e63, #ff5722);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.3rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 20px;
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.3);
+        }
+
+        .surprise-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(233, 30, 99, 0.4);
+        }
+
+        .maze-btn {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            font-size: 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.3);
+            min-width: 140px;
+        }
+
+        .maze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+            background: linear-gradient(45deg, #5f3dc4, #9775fa);
+        }
+
+        .maze-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .maze-btn-wrapper {
+            position: relative;
+            text-align: center;
+        }
+
+        .maze-btn {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .maze-btn.locked {
+            background: linear-gradient(45deg, #636e72, #b2bec3);
+            animation: shake 2s infinite;
+        }
+
+        .maze-btn.unlocking {
+            animation: unlock 1s ease-in-out;
+            background: linear-gradient(45deg, #00b894, #00cec9);
+        }
+
+        .maze-btn.unlocked {
+            background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+            animation: glow 2s infinite alternate;
+        }
+
+        .lock-icon {
+            font-size: 2rem;
+            margin-bottom: 5px;
+            transition: all 0.3s;
+        }
+
+        .btn-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            opacity: 0.3;
+            transition: all 0.3s;
+        }
+
+        .maze-btn.unlocked .btn-content {
+            opacity: 1;
+        }
+
+        .maze-btn.unlocked .lock-icon {
+            display: none;
+        }
+
+        .btn-emoji {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .btn-text {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .unlock-hint {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #e91e63;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+
+        .maze-btn.unlocked + .unlock-hint {
+            display: none;
+        }
+
+        .maze-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(108, 92, 231, 0.4);
+        }
+
+        .maze-btn.locked:hover {
+            animation: shake 0.5s infinite;
+            transform: translateY(-2px);
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes unlock {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); background: linear-gradient(45deg, #fdcb6e, #e17055); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 8px 25px rgba(108, 92, 231, 0.3); }
+            to { box-shadow: 0 8px 35px rgba(108, 92, 231, 0.6), 0 0 20px rgba(108, 92, 231, 0.4); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        .memory-lane {
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .memory-lane h3 {
+            text-align: center;
+            color: #2d3436;
+            margin-bottom: 20px;
+        }
+
+        .memory {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #fd79a8;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(100px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); }
+            50% { transform: translateY(-50px) rotate(180deg); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes rainbow {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="balloons">
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+        <div class="balloon">🎈</div>
+    </div>
+
+    <div class="container">
+        <div class="birthday-card">
+            <h1>Happy Birthday</h1>
+            <div class="name">Pragati!</div>
+            
+            <div class="hearts">
+                <span class="heart">💖</span>
+                <span class="heart">💕</span>
+                <span class="heart">💖</span>
+            </div>
+
+            <div class="intro-line" style="font-size: 1.3rem; color: #e91e63; margin-bottom: 25px; font-style: italic;">
+                🌸 To the girl who makes my world brighter every single day…
+            </div>
+
+            <div class="personal-message">
+                💖 Today isn't just any day — it's the day the world became brighter because you were born.<br><br>
+                
+                Pragati, you fill my life with laughter, warmth, and endless love.<br>
+                You make ordinary moments feel magical and every challenge feel lighter just by being there.<br><br>
+                
+                Happy Birthday, my beautiful Pragati.<br>
+                Here's to more late-night laughs, spontaneous adventures, and quiet moments that mean everything.<br><br>
+                
+                I love you — endlessly, deeply, and always. 💫
+            </div>
+
+            <div class="maze-navigation" style="margin: 30px 0;">
+                <h3 style="color: #e91e63; margin-bottom: 20px; animation: pulse 2s infinite;">🗝️ Unlock More Surprises</h3>
+                <div class="maze-container">
+                    <div class="maze-btn-wrapper">
+                        <button class="maze-btn locked" id="gallery-btn" onclick="unlockSurprise('gallery')">
+                            <div class="lock-icon">🔒</div>
+                            <div class="btn-content">
+                                <span class="btn-emoji">📸</span>
+                                <span class="btn-text">Our Memories</span>
+                            </div>
+                        </button>
+                        <div class="unlock-hint">Click to unlock!</div>
+                    </div>
+                    
+                    <div class="maze-btn-wrapper">
+                        <button class="maze-btn locked" id="letter-btn" onclick="unlockSurprise('letter')">
+                            <div class="lock-icon">🔒</div>
+                            <div class="btn-content">
+                                <span class="btn-emoji">💌</span>
+                                <span class="btn-text">Love Letter</span>
+                            </div>
+                        </button>
+                        <div class="unlock-hint">Click to unlock!</div>
+                    </div>
+                    
+                    <div class="maze-btn-wrapper">
+                        <button class="maze-btn locked" id="reasons-btn" onclick="unlockSurprise('reasons')">
+                            <div class="lock-icon">🔒</div>
+                            <div class="btn-content">
+                                <span class="btn-emoji">💕</span>
+                                <span class="btn-text">Why I Love You</span>
+                            </div>
+                        </button>
+                        <div class="unlock-hint">Click to unlock!</div>
+                    </div>
+                    
+                    <div class="maze-btn-wrapper">
+                        <button class="maze-btn locked" id="dreams-btn" onclick="unlockSurprise('dreams')">
+                            <div class="lock-icon">🔒</div>
+                            <div class="btn-content">
+                                <span class="btn-emoji">✨</span>
+                                <span class="btn-text">Our Future</span>
+                            </div>
+                        </button>
+                        <div class="unlock-hint">Click to unlock!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showFinalSurprise() {
+            // Create massive confetti explosion
+            for (let i = 0; i < 100; i++) {
+                setTimeout(() => createConfetti(), i * 50);
+            }
+            
+            // Show special message
+            setTimeout(() => {
+                alert("🎉 Pragati, you're not just my girlfriend, you're my best friend, my inspiration, and my favorite person in the whole world! I'm so grateful for every moment with you. Happy Birthday, beautiful! 🎉💕");
+            }, 1000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            const emojis = ['🎉', '🎊', '✨', '🌟', '💫', '🎈', '🎂', '💖', '💕', '🦋'];
+            confetti.innerHTML = emojis[Math.floor(Math.random() * emojis.length)];
+            confetti.style.position = 'fixed';
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.top = '-10px';
+            confetti.style.fontSize = (Math.random() * 2 + 1) + 'rem';
+            confetti.style.pointerEvents = 'none';
+            confetti.style.zIndex = '1000';
+            confetti.style.animation = 'fall 4s linear forwards';
+            
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 4000);
+        }
+
+        // Add falling animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Auto-create some confetti on page load
+        setTimeout(() => {
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => createConfetti(), i * 200);
+            }
+        }, 2000);
+
+        // Interactive unlock system with persistence
+        let unlockedSections = new Set(JSON.parse(localStorage.getItem('unlockedSections') || '[]'));
+        
+        // Initialize unlock states on page load
+        window.addEventListener('load', function() {
+            unlockedSections.forEach(section => {
+                const btn = document.getElementById(section + '-btn');
+                if (btn) {
+                    btn.classList.remove('locked');
+                    btn.classList.add('unlocked');
+                }
+            });
+        });
+        
+        function unlockSurprise(section) {
+            const btn = document.getElementById(section + '-btn');
+            
+            if (unlockedSections.has(section)) {
+                // Already unlocked, navigate directly
+                window.location.href = section + '.html';
+                return;
+            }
+            
+            // Unlock animation
+            btn.classList.remove('locked');
+            btn.classList.add('unlocking');
+            
+            // Create unlock effect
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createUnlockSparkle(btn), i * 50);
+            }
+            
+            setTimeout(() => {
+                btn.classList.remove('unlocking');
+                btn.classList.add('unlocked');
+                unlockedSections.add(section);
+                
+                // Save to localStorage
+                localStorage.setItem('unlockedSections', JSON.stringify([...unlockedSections]));
+                
+                // Navigate directly without confirmation
+                window.location.href = section + '.html';
+            }, 1000);
+        }
+        
+        function createUnlockSparkle(button) {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            sparkle.style.fontSize = '1.5rem';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleUp 1s ease-out forwards';
+            sparkle.style.zIndex = '1000';
+            
+            button.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 1000);
+        }
+        
+        // Add sparkle animation
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes sparkleUp {
+                0% { opacity: 1; transform: translateY(0) scale(0); }
+                50% { opacity: 1; transform: translateY(-20px) scale(1); }
+                100% { opacity: 0; transform: translateY(-40px) scale(0); }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+    </script>
+</body>
+</html>

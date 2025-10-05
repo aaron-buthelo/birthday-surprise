@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Letter Just for You 💌</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #2c3e50, #3498db, #9b59b6);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .letter-container {
+            background: #f8f9fa;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .letter-header {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .letter-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .letter-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .letter-body {
+            padding: 40px;
+            background: #fff;
+            position: relative;
+        }
+
+        .letter-body::before {
+            content: '';
+            position: absolute;
+            left: 60px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e74c3c;
+            opacity: 0.3;
+        }
+
+        .date {
+            text-align: right;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            font-style: italic;
+        }
+
+        .salutation {
+            font-size: 1.4rem;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .letter-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .signature {
+            text-align: right;
+            margin-top: 40px;
+            font-size: 1.3rem;
+            color: #e74c3c;
+            font-style: italic;
+        }
+
+        .typewriter {
+            border-right: 2px solid #e74c3c;
+            animation: blink 1s infinite;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: #e74c3c; }
+            51%, 100% { border-color: transparent; }
+        }
+
+        .heart-decoration {
+            position: absolute;
+            font-size: 1.5rem;
+            color: #e74c3c;
+            opacity: 0.3;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .heart-decoration:nth-child(1) { top: 10%; right: 10%; animation-delay: 0s; }
+        .heart-decoration:nth-child(2) { top: 30%; left: 5%; animation-delay: 1s; }
+        .heart-decoration:nth-child(3) { bottom: 20%; right: 15%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="letter-container">
+        <button class="back-btn" onclick="window.location.href='birthday.html'">🔙 Back</button>
+        
+        <div class="heart-decoration">💕</div>
+        <div class="heart-decoration">💖</div>
+        <div class="heart-decoration">💝</div>
+        
+        <div class="letter-header">
+            <h1>💌 A Letter From My Heart</h1>
+            <p>Written with all my love</p>
+        </div>
+        
+        <div class="letter-body">
+            <div class="date">Today, on your special day</div>
+            
+            <div class="salutation">My Dearest Pragati,</div>
+            
+            <div class="letter-text" id="letter-content">
+                <!-- Content will be typed here -->
+            </div>
+            
+            <div class="signature">
+                With all my love,<br>
+                Your devoted boyfriend 💕
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const letterContent = `I'm sitting here thinking about how to put into words what you mean to me, and honestly, I don't think any language has enough beautiful words to describe it.
+
+From the moment you walked into my life, everything changed. You didn't just become my girlfriend - you became my best friend, my confidant, my source of strength, and my greatest joy.
+
+I love the way you laugh at my terrible jokes, even when they're not funny. I love how you get excited about little things, and how your enthusiasm is so contagious that I find myself getting excited about them too.
+
+I love your kindness - how you always think of others first, how you make everyone around you feel special and valued. You have this incredible ability to make the world a brighter place just by being in it.
+
+I love our late-night conversations when we lose track of time talking about everything and nothing. I love how comfortable we are in silence together, and how even ordinary moments feel extraordinary when you're there.
+
+Pragati, you've taught me what it means to love someone completely and unconditionally. You've shown me that home isn't a place - it's a person. And you are my home.
+
+On your birthday, I want you to know that loving you is the easiest thing I've ever done, and being loved by you is the greatest gift I've ever received.
+
+Happy Birthday, my beautiful Pragati. Here's to many more years of adventures, laughter, and love together.`;
+
+        let i = 0;
+        const speed = 50; // typing speed in milliseconds
+
+        function typeWriter() {
+            if (i < letterContent.length) {
+                document.getElementById("letter-content").innerHTML += letterContent.charAt(i);
+                i++;
+                setTimeout(typeWriter, speed);
+            } else {
+                // Remove the blinking cursor when done
+                document.getElementById("letter-content").classList.remove("typewriter");
+            }
+        }
+
+        // Start typing when page loads
+        window.onload = function() {
+            document.getElementById("letter-content").classList.add("typewriter");
+            setTimeout(typeWriter, 1000); // Start after 1 second
+        };
+    </script>
+</body>
+</html>

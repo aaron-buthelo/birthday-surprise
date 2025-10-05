@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Future Together ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: shimmer 3s infinite;
+        }
+
+        .subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.4rem;
+            margin-bottom: 50px;
+            font-style: italic;
+        }
+
+        .dreams-timeline {
+            position: relative;
+            margin: 50px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(to bottom, #ffeaa7, #fab1a0, #fd79a8);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .dream-item {
+            display: flex;
+            align-items: center;
+            margin: 60px 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .dream-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .dream-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .dream-content {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 0 30px;
+            flex: 1;
+            max-width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .dream-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            transform: translateY(-50%);
+        }
+
+        .dream-item:nth-child(odd) .dream-content::before {
+            right: -30px;
+            border-left-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .dream-item:nth-child(even) .dream-content::before {
+            left: -30px;
+            border-right-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .dream-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            color: white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 10;
+            position: relative;
+        }
+
+        .dream-title {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .dream-description {
+            font-size: 1.1rem;
+            color: #34495e;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .back-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 40px 20px;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+        }
+
+        .final-dream {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 50px 0;
+            font-size: 1.3rem;
+            color: #2c3e50;
+            font-style: italic;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .final-dream.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            color: white;
+            font-size: 1rem;
+            animation: twinkle 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+            50% { text-shadow: 2px 2px 20px rgba(255,255,255,0.5); }
+            100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .dream-item {
+                flex-direction: column !important;
+            }
+            
+            .dream-content::before {
+                display: none;
+            }
+            
+            .timeline-line {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="stars" id="stars"></div>
+    
+    <div class="container">
+        <h1>✨ Our Future Together</h1>
+        <p class="subtitle">All the beautiful adventures waiting for us...</p>
+        
+        <div class="dreams-timeline">
+            <div class="timeline-line"></div>
+            
+            <div class="dream-item">
+                <div class="dream-content">
+                    <div class="dream-title">🏠 Our Dream Home</div>
+                    <div class="dream-description">
+                        A cozy place where we can build our life together. Maybe a little garden where we can grow flowers and vegetables, and a big kitchen where we can cook together and make memories.
+                    </div>
+                </div>
+                <div class="dream-icon">🏠</div>
+            </div>
+            
+            <div class="dream-item">
+                <div class="dream-content">
+                    <div class="dream-title">✈️ Travel the World</div>
+                    <div class="dream-description">
+                        I want to explore every corner of the world with you. From watching sunsets in Santorini to seeing the Northern Lights in Iceland. Every adventure will be perfect because you'll be there with me.
+                    </div>
+                </div>
+                <div class="dream-icon">✈️</div>
+            </div>
+            
+            <div class="dream-item">
+                <div class="dream-content">
+                    <div class="dream-title">🎓 Growing Together</div>
+                    <div class="dream-description">
+                        Supporting each other's dreams and goals. Celebrating your successes and being there through challenges. I want to see you achieve everything you've ever dreamed of.
+                    </div>
+                </div>
+                <div class="dream-icon">🎓</div>
+            </div>
+            
+            <div class="dream-item">
+                <div class="dream-content">
+                    <div class="dream-title">👨‍👩‍👧‍👦 Our Family</div>
+                    <div class="dream-description">
+                        Maybe someday we'll have little ones running around, with your beautiful eyes and infectious laughter. Teaching them about love, kindness, and all the wonderful things you've taught me.
+                    </div>
+                </div>
+                <div class="dream-icon">👨‍👩‍👧‍👦</div>
+            </div>
+            
+            <div class="dream-item">
+                <div class="dream-content">
+                    <div class="dream-title">🌅 Growing Old Together</div>
+                    <div class="dream-description">
+                        Sitting on our porch when we're old and gray, still holding hands, still laughing at each other's jokes, still as in love as we are today. That's my biggest dream of all.
+                    </div>
+                </div>
+                <div class="dream-icon">🌅</div>
+            </div>
+        </div>
+        
+        <div class="final-dream" id="final-dream">
+            "Pragati, every dream I have for the future has you in it. You're not just part of my future - you ARE my future. I can't wait to make all these dreams come true with you by my side. Happy Birthday, my forever love! 💕"
+        </div>
+        
+        <button class="back-btn" onclick="window.location.href='birthday.html'">
+            🔙 Back to Birthday
+        </button>
+    </div>
+
+    <script>
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 50; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = '✨';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Animate dreams on scroll
+        function animateOnScroll() {
+            const dreamItems = document.querySelectorAll('.dream-item');
+            const finalDream = document.getElementById('final-dream');
+            
+            dreamItems.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.8) {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 300);
+                }
+            });
+            
+            // Show final dream when last item is visible
+            const lastItem = dreamItems[dreamItems.length - 1];
+            if (lastItem && lastItem.classList.contains('visible')) {
+                setTimeout(() => {
+                    finalDream.classList.add('visible');
+                }, 1000);
+            }
+        }
+
+        // Initialize
+        createStars();
+        animateOnScroll();
+        
+        // Animate on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Auto-animate after page load
+        setTimeout(() => {
+            animateOnScroll();
+        }, 1000);
+    </script>
+</body>
+</html>
