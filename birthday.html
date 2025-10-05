@@ -114,12 +114,96 @@
     /* Confetti falls */
     @keyframes fall{ to{ transform: translateY(100vh) rotate(360deg); opacity:0 } }
     @keyframes blastOut{ 0%{ transform:scale(0) rotate(0deg); opacity:1 } 50%{ transform:scale(1.5) rotate(180deg); opacity:1 } 100%{ transform:scale(.5) rotate(360deg) translateY(100px); opacity:0 } }
+    @keyframes shake{ 0%,100%{ transform:translateX(0) } 25%{ transform:translateX(-5px) } 75%{ transform:translateX(5px) } }
 
     /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .name, .heart, .unlock-btn.unlocked, .balloon{ animation:none !important }
     }
-      /* Mobile tweaks */
+      /* Question Modal */
+    .question-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(5px);
+    }
+
+    .question-card {
+      background: var(--card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--card-edge);
+      border-radius: 20px;
+      padding: 24px;
+      max-width: 400px;
+      width: 90vw;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .question-title {
+      color: var(--magenta);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .question-text {
+      color: var(--ink);
+      font-size: 1rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .answer-options {
+      display: grid;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .answer-btn {
+      background: linear-gradient(45deg, var(--indigo), var(--lav));
+      color: white;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 16px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-align: left;
+    }
+
+    .answer-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(108,92,231,0.4);
+    }
+
+    .answer-btn:active {
+      transform: scale(0.98);
+    }
+
+    .close-modal {
+      background: #8e9eab;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-size: 0.85rem;
+    }
+
+    .close-modal:hover {
+      background: #7a8691;
+    }
+
+    /* Mobile tweaks */
     @media (max-width: 420px){
       .container{ width:94vw }
       .birthday-card{ padding:22px 16px }
@@ -128,6 +212,8 @@
       .btn-text{ font-size:1rem }
       .personal-message{ padding:16px 12px; font-size:1rem }
       .balloon{ font-size:1.6rem }
+      .question-card { padding: 20px 16px; }
+      .answer-btn { font-size: 0.85rem; padding: 10px 12px; }
     }
   </style>
 </head>
@@ -193,10 +279,113 @@
     </div>
   </div>
 
+  <!-- Question Modal -->
+  <div class="question-modal" id="question-modal">
+    <div class="question-card">
+      <div class="question-title" id="question-title">🔓 Unlock Surprise</div>
+      <div class="question-text" id="question-text"></div>
+      <div class="answer-options" id="answer-options"></div>
+      <button class="close-modal" onclick="closeQuestionModal()">Close</button>
+    </div>
+  </div>
+
   <script>
     const unlockedSections = new Set(JSON.parse(localStorage.getItem('unlockedSections') || '[]'));
     const isSmall = window.matchMedia('(max-width: 420px)').matches; 
     const btnIds = ['gallery','letter','reasons','dreams'];
+
+    // Questions for each section
+    const questions = {
+      gallery: {
+        question: "What was our second date?",
+        options: [
+          "A) Pisco y Nazca 🍽️",
+          "B) Jinya Ramen 🍜", 
+          "C) Open Roads 🛣️",
+          "D) Park walk 🌳"
+        ],
+        correct: 0
+      },
+      letter: {
+        question: "Where was our first kiss?",
+        options: [
+          "A) In a restaurant 🍽️",
+          "B) On the road 🛣️",
+          "C) At the park 🌳", 
+          "D) At your place 🏠"
+        ],
+        correct: 1
+      },
+      reasons: {
+        question: "How do you make me feel?",
+        options: [
+          "A) Complete 💯",
+          "B) Happy 😊",
+          "C) Lucky 🍀",
+          "D) All of the above ✨"
+        ],
+        correct: 3
+      },
+      dreams: {
+        question: "What's our dream?",
+        options: [
+          "A) Big house 🏡",
+          "B) Travel the world ✈️",
+          "C) Grow old together 👴👵",
+          "D) All of the above 💕"
+        ],
+        correct: 3
+      }
+    };
+
+    function showQuestionModal(section) {
+      const modal = document.getElementById('question-modal');
+      const questionText = document.getElementById('question-text');
+      const optionsContainer = document.getElementById('answer-options');
+      
+      const q = questions[section];
+      questionText.textContent = q.question;
+      
+      optionsContainer.innerHTML = '';
+      q.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'answer-btn';
+        btn.textContent = option;
+        btn.onclick = () => checkAnswer(section, index);
+        optionsContainer.appendChild(btn);
+      });
+      
+      modal.style.display = 'flex';
+    }
+
+    function closeQuestionModal() {
+      document.getElementById('question-modal').style.display = 'none';
+    }
+
+    function checkAnswer(section, selectedIndex) {
+      const q = questions[section];
+      if (selectedIndex === q.correct) {
+        // Correct answer - unlock section
+        closeQuestionModal();
+        const btn = document.getElementById(section + '-btn');
+        btn.classList.remove('locked');
+        btn.classList.add('unlocked');
+        unlockedSections.add(section);
+        localStorage.setItem('unlockedSections', JSON.stringify([...unlockedSections]));
+        syncButtons();
+        
+        // Celebration
+        confettiBurst({ count: 30, originEl: btn });
+        setTimeout(() => { window.location.href = section + '.html'; }, 600);
+      } else {
+        // Wrong answer - shake and try again
+        const optionsContainer = document.getElementById('answer-options');
+        optionsContainer.style.animation = 'shake 0.5s ease-in-out';
+        setTimeout(() => {
+          optionsContainer.style.animation = '';
+        }, 500);
+      }
+    }
 
     function syncButtons(){
       let unlockedCount = 0;
@@ -230,21 +419,12 @@
     function unlockSurprise(section){
       const btn = document.getElementById(section + '-btn');
       if (!btn) return;
-
-      if (unlockedSections.has(section)){
+      // If already unlocked, navigate directly; otherwise ask the quiz
+      if (unlockedSections.has(section)) {
         window.location.href = section + '.html';
         return;
       }
-
-      btn.classList.remove('locked');
-      btn.classList.add('unlocked');
-      unlockedSections.add(section);
-      localStorage.setItem('unlockedSections', JSON.stringify([...unlockedSections]));
-      syncButtons();
-
-      // Mini-burst feedback
-      confettiBurst({ count: 24, originEl: btn });
-      setTimeout(() => { window.location.href = section + '.html'; }, 550);
+      showQuestionModal(section);
     }
 
     /* ================= Confetti Engine ================ */
@@ -291,6 +471,26 @@
         setTimeout(() => createConfetti({ x: cx + (Math.random()*80-40), y: cy + (Math.random()*20-10), size: 18 + Math.random()*18, life: 1800 + Math.random()*800, anim: 'blastOut' }), i*20);
       }
     }
+
+    /* ================= Simple Test Harness (console) ================ */
+    window.addEventListener('DOMContentLoaded', () => {
+      try {
+        console.group('%cBirthday Hub – Tests','color:#6c5ce7;font-weight:bold');
+        console.assert(typeof unlockSurprise === 'function', 'unlockSurprise should be a function');
+        console.assert(document.getElementById('question-modal'), 'Modal element should exist');
+        const expectedKeys = ['gallery','letter','reasons','dreams'];
+        expectedKeys.forEach(k => {
+          console.assert(questions[k], `Missing question config for ${k}`);
+          console.assert(Array.isArray(questions[k].options) && questions[k].options.length > 0, `Options missing for ${k}`);
+          console.assert(typeof questions[k].correct === 'number', `Correct index missing for ${k}`);
+        });
+        console.assert(document.querySelectorAll('.unlock-btn').length === expectedKeys.length, 'There should be 4 unlock buttons');
+        console.log('All basic tests passed ✅');
+        console.groupEnd();
+      } catch (e) {
+        console.error('Test harness error', e);
+      }
+    });
   </script>
 </body>
 </html>
