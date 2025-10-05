@@ -139,6 +139,68 @@
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .letter-container {
+                margin: 20px 0;
+            }
+            
+            .letter-header h1 {
+                font-size: 2rem;
+            }
+            
+            .letter-header p {
+                font-size: 1rem;
+            }
+            
+            .letter-body {
+                padding: 25px 20px;
+            }
+            
+            .salutation {
+                font-size: 1.2rem;
+            }
+            
+            .letter-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .signature {
+                font-size: 1.1rem;
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .letter-header {
+                padding: 20px 15px;
+            }
+            
+            .letter-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .letter-body {
+                padding: 20px 15px;
+            }
+            
+            .letter-text {
+                font-size: 0.95rem;
+            }
+            
+            .salutation {
+                font-size: 1.1rem;
+            }
+            
+            .signature {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>

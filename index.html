@@ -80,7 +80,7 @@
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin-bottom: 20px;
             background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3);
             -webkit-background-clip: text;
@@ -90,16 +90,67 @@
         }
 
         .message {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
             margin-bottom: 30px;
             opacity: 0.9;
             line-height: 1.6;
         }
 
         .click-hint {
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.7;
             animation: pulse 2s infinite;
+        }
+
+        .envelope {
+            width: 250px;
+            height: 160px;
+            background: #8B4513;
+            margin: 0 auto 30px;
+            position: relative;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            animation: glow 2s infinite alternate;
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 125px solid transparent;
+            border-right: 125px solid transparent;
+            border-bottom: 80px solid #D2691E;
+            border-radius: 10px 10px 0 0;
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .message {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+            
+            .envelope {
+                width: 200px;
+                height: 130px;
+            }
+            
+            .envelope::before {
+                border-left: 100px solid transparent;
+                border-right: 100px solid transparent;
+                border-bottom: 65px solid #D2691E;
+            }
+            
+            .envelope::after {
+                font-size: 1.5rem;
+            }
         }
 
         @keyframes fadeIn {

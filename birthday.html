@@ -60,7 +60,7 @@
         }
 
         h1 {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             background: linear-gradient(45deg, #e91e63, #ff5722, #ff9800, #4caf50, #2196f3, #9c27b0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -70,7 +70,7 @@
         }
 
         .name {
-            font-size: 4rem;
+            font-size: 3rem;
             color: #e91e63;
             font-weight: bold;
             margin: 20px 0;
@@ -78,12 +78,81 @@
             animation: bounce 2s infinite;
         }
 
+        .intro-line {
+            font-size: 1.1rem;
+            color: #e91e63;
+            margin-bottom: 25px;
+            font-style: italic;
+        }
+
         .personal-message {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: #333;
             line-height: 1.8;
             margin: 30px 0;
             font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .birthday-card {
+                padding: 30px 20px;
+                margin: 0 10px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .name {
+                font-size: 2.2rem;
+            }
+            
+            .intro-line {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+            
+            .personal-message {
+                font-size: 1.1rem;
+                padding: 0 10px;
+            }
+            
+            .maze-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 0 10px;
+            }
+            
+            .maze-btn {
+                height: 100px;
+                font-size: 0.9rem;
+            }
+            
+            .btn-emoji {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .name {
+                font-size: 2rem;
+            }
+            
+            .intro-line {
+                font-size: 0.95rem;
+            }
+            
+            .personal-message {
+                font-size: 1rem;
+            }
+            
+            .hearts .heart {
+                font-size: 2rem;
+            }
         }
 
         .love-notes {

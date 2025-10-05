@@ -200,8 +200,30 @@
         }
 
         @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+                margin-bottom: 15px;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+                margin-bottom: 40px;
+                padding: 0 10px;
+            }
+            
             .dream-item {
                 flex-direction: column !important;
+                margin: 40px 0;
+            }
+            
+            .dream-content {
+                margin: 20px 10px;
+                padding: 25px 20px;
+                max-width: none;
             }
             
             .dream-content::before {
@@ -210,6 +232,54 @@
             
             .timeline-line {
                 display: none;
+            }
+            
+            .dream-title {
+                font-size: 1.3rem;
+            }
+            
+            .dream-description {
+                font-size: 1rem;
+                text-align: center;
+            }
+            
+            .final-dream {
+                padding: 30px 20px;
+                margin: 40px 10px;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .dream-content {
+                padding: 20px 15px;
+            }
+            
+            .dream-title {
+                font-size: 1.2rem;
+            }
+            
+            .dream-description {
+                font-size: 0.95rem;
+            }
+            
+            .dream-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 2rem;
+            }
+            
+            .final-dream {
+                font-size: 1rem;
+                padding: 25px 15px;
             }
         }
     </style>
