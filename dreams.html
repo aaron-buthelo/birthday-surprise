@@ -26,10 +26,9 @@
         }
 
         h1 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 15px;
             font-weight: 600;
-            animation: shimmer 3s infinite;
         }
 
         .subtitle {
@@ -39,14 +38,14 @@
             font-style: italic;
         }
 
-        .dreams-list {
+        .dreams-container {
             display: flex;
             flex-direction: column;
-            gap: 25px;
+            gap: 20px;
             margin-bottom: 30px;
         }
 
-        .dream-item {
+        .dream-card {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 25px 20px;
@@ -54,9 +53,10 @@
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
+            text-align: center;
         }
 
-        .dream-item.visible {
+        .dream-card.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -83,13 +83,13 @@
         }
 
         .dream-description {
-            font-size: 0.95rem;
+            font-size: 1rem;
             color: #34495e;
             line-height: 1.6;
             text-align: left;
         }
 
-        .final-dream {
+        .final-message {
             background: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
             padding: 25px 20px;
@@ -102,9 +102,10 @@
             transform: translateY(30px);
             transition: all 0.8s ease;
             line-height: 1.6;
+            text-align: left;
         }
 
-        .final-dream.visible {
+        .final-message.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -125,20 +126,38 @@
             transform: scale(0.95);
         }
 
-        @keyframes shimmer {
-            0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-            50% { text-shadow: 2px 2px 20px rgba(255,255,255,0.5); }
-            100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .stars {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            color: white;
+            font-size: 0.8rem;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
+    <div class="stars" id="stars"></div>
+    
     <div class="container">
         <h1>✨ Our Future Together</h1>
         <p class="subtitle">All the beautiful adventures waiting for us...</p>
         
-        <div class="dreams-list">
-            <div class="dream-item">
+        <div class="dreams-container">
+            <div class="dream-card">
                 <div class="dream-icon">🏠</div>
                 <div class="dream-title">Our Dream Home</div>
                 <div class="dream-description">
@@ -146,7 +165,7 @@
                 </div>
             </div>
             
-            <div class="dream-item">
+            <div class="dream-card">
                 <div class="dream-icon">✈️</div>
                 <div class="dream-title">Travel the World</div>
                 <div class="dream-description">
@@ -154,7 +173,7 @@
                 </div>
             </div>
             
-            <div class="dream-item">
+            <div class="dream-card">
                 <div class="dream-icon">🎓</div>
                 <div class="dream-title">Growing Together</div>
                 <div class="dream-description">
@@ -162,7 +181,7 @@
                 </div>
             </div>
             
-            <div class="dream-item">
+            <div class="dream-card">
                 <div class="dream-icon">👨‍👩‍👧‍👦</div>
                 <div class="dream-title">Our Family</div>
                 <div class="dream-description">
@@ -170,7 +189,7 @@
                 </div>
             </div>
             
-            <div class="dream-item">
+            <div class="dream-card">
                 <div class="dream-icon">🌅</div>
                 <div class="dream-title">Growing Old Together</div>
                 <div class="dream-description">
@@ -179,7 +198,7 @@
             </div>
         </div>
         
-        <div class="final-dream" id="final-dream">
+        <div class="final-message" id="final-message">
             "Pragati, every dream I have for the future has you in it. You're not just part of my future - you ARE my future. I can't wait to make all these dreams come true with you by my side. Happy Birthday, my forever love! 💕"
         </div>
         
@@ -189,23 +208,38 @@
     </div>
 
     <script>
-        function animateOnScroll() {
-            const dreamItems = document.querySelectorAll('.dream-item');
-            const finalDream = document.getElementById('final-dream');
+        // Create twinkling stars
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            for (let i = 0; i < 30; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.innerHTML = '✨';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        function animateCards() {
+            const dreamCards = document.querySelectorAll('.dream-card');
+            const finalMessage = document.getElementById('final-message');
             
-            dreamItems.forEach((item, index) => {
+            dreamCards.forEach((card, index) => {
                 setTimeout(() => {
-                    item.classList.add('visible');
+                    card.classList.add('visible');
                 }, index * 300);
             });
             
             setTimeout(() => {
-                finalDream.classList.add('visible');
-            }, dreamItems.length * 300 + 500);
+                finalMessage.classList.add('visible');
+            }, dreamCards.length * 300 + 500);
         }
 
-        // Start animation after page load
-        setTimeout(animateOnScroll, 500);
+        // Initialize
+        createStars();
+        setTimeout(animateCards, 500);
     </script>
 </body>
 </html>
