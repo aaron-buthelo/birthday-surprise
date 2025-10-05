@@ -167,10 +167,24 @@
     </div>
 
     <script>
-        // Reset envelope state on page load
-        window.addEventListener('load', function() {
+        // Reset envelope state on page load and when navigating back
+        function resetEnvelope() {
             const envelope = document.querySelector('.envelope');
+            const clickHint = document.querySelector('.click-hint');
+            const loadingMessage = document.getElementById('loading-message');
+            
             envelope.classList.remove('opening');
+            envelope.style.pointerEvents = 'auto';
+            clickHint.style.opacity = '1';
+            loadingMessage.classList.remove('show');
+        }
+
+        window.addEventListener('load', resetEnvelope);
+        window.addEventListener('pageshow', resetEnvelope);
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                resetEnvelope();
+            }
         });
 
         function createStars() {
