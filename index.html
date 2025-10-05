@@ -256,6 +256,13 @@
         document.head.appendChild(style);
 
         createStars();
+        
+        // Force reset envelope immediately and on every page focus
+        setInterval(function() {
+            if (!document.hidden) {
+                resetEnvelope();
+            }
+        }, 100);
     </script>
 </body>
 </html>
