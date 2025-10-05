@@ -71,6 +71,24 @@
             justify-content: center;
             font-size: 3rem;
             margin-bottom: 15px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .photo-placeholder .emoji-fallback {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3rem;
+            z-index: 1;
         }
 
         .photo-caption {
@@ -106,33 +124,101 @@
 
         <div class="photo-grid">
             <div class="photo-card" onclick="showPhotoMessage(1)">
-                <div class="photo-placeholder">📷</div>
+                <div class="photo-placeholder">
+                    <img src="photos/first-date.jpg" alt="Our First Date">
+                </div>
                 <div class="photo-caption">Our First Date ✨</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(2)">
-                <div class="photo-placeholder">🌅</div>
-                <div class="photo-caption">That Perfect Sunrise 🌄</div>
+                <div class="photo-placeholder">
+                    <img src="photos/your-first-bday.jpg" alt="Your First Birthday">
+                </div>
+                <div class="photo-caption">Your First Birthday 🎂</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(3)">
-                <div class="photo-placeholder">🎭</div>
-                <div class="photo-caption">Being Silly Together 😄</div>
+                <div class="photo-placeholder">
+                    <img src="photos/first-diwali.jpg" alt="First Diwali Together">
+                </div>
+                <div class="photo-caption">First Diwali Together 🪔</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(4)">
-                <div class="photo-placeholder">🍕</div>
-                <div class="photo-caption">Our Favorite Food Adventure 🍝</div>
+                <div class="photo-placeholder">
+                    <img src="photos/ramen-dates.jpg" alt="Ramen Dates">
+                </div>
+                <div class="photo-caption">Our Ramen Adventures 🍜</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(5)">
-                <div class="photo-placeholder">🌸</div>
-                <div class="photo-caption">Spring Walk in the Park 🌺</div>
+                <div class="photo-placeholder">
+                    <img src="photos/more-ramen.jpg" alt="More Ramen Fun">
+                </div>
+                <div class="photo-caption">More Ramen Fun 😄</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(6)">
-                <div class="photo-placeholder">💕</div>
-                <div class="photo-caption">Just Being Us 💖</div>
+                <div class="photo-placeholder">
+                    <img src="photos/titanic.jpg" alt="Titanic Moment">
+                </div>
+                <div class="photo-caption">Our Titanic Moment 🚢</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(7)">
+                <div class="photo-placeholder">
+                    <img src="photos/alexandria.jpg" alt="Alexandria Trip">
+                </div>
+                <div class="photo-caption">Alexandria Adventures 🏛️</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(8)">
+                <div class="photo-placeholder">
+                    <img src="photos/to-trips.jpg" alt="Our Trips">
+                </div>
+                <div class="photo-caption">Travel Memories ✈️</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(9)">
+                <div class="photo-placeholder">
+                    <img src="photos/to-new-years.jpg" alt="New Year's">
+                </div>
+                <div class="photo-caption">New Year's Together 🎊</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(10)">
+                <div class="photo-placeholder">
+                    <img src="photos/more-new-years.jpg" alt="More New Year's">
+                </div>
+                <div class="photo-caption">More New Year's Fun 🥳</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(11)">
+                <div class="photo-placeholder">
+                    <img src="photos/night-outs.jpg" alt="Night Outs">
+                </div>
+                <div class="photo-caption">Our Night Outs 🌃</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(12)">
+                <div class="photo-placeholder">
+                    <img src="photos/more-dinners.jpg" alt="Dinner Dates">
+                </div>
+                <div class="photo-caption">Dinner Dates 🍽️</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(13)">
+                <div class="photo-placeholder">
+                    <img src="photos/more-new.jpg" alt="New Memories">
+                </div>
+                <div class="photo-caption">Making New Memories 💕</div>
+            </div>
+
+            <div class="photo-card" onclick="showPhotoMessage(14)">
+                <div class="photo-placeholder">
+                    <img src="photos/to-mine.jpg" alt="Special Moments">
+                </div>
+                <div class="photo-caption">Our Special Moments 💖</div>
             </div>
         </div>
 
@@ -143,12 +229,20 @@
 
     <script>
         const photoMessages = {
-            1: "The moment I knew you were going to change my life forever. Your smile that day is still the most beautiful thing I've ever seen. 💕",
-            2: "Remember how we stayed up all night just talking? Watching the sunrise with you made me realize I never want to watch another one without you. 🌅",
-            3: "I love how we can be completely ourselves around each other. Your laugh in this moment still gives me butterflies! 😄",
-            4: "Our first food adventure! You got sauce on your nose and I fell even more in love with you. Every meal tastes better when you're there. 🍕",
-            5: "That perfect spring day when everything felt magical. Walking with you, I realized home isn't a place - it's wherever you are. 🌸",
-            6: "This is my favorite photo of us. Not because we look perfect, but because we look perfectly happy. That's what you give me every day. 💕"
+            1: "Our very first date! I was so nervous but you made me feel so comfortable. This is where our beautiful story began. 💕",
+            2: "Your first birthday we celebrated together! Seeing your joy that day made me realize how much I wanted to be part of all your special moments. 🎂",
+            3: "Our first Diwali together! You looked absolutely radiant, and I felt so lucky to be part of your traditions and celebrations. 🪔",
+            4: "Our ramen adventures! Who knew slurping noodles could be so romantic? Every meal with you is my favorite meal. 🍜",
+            5: "More ramen fun! I love how we can be completely silly and comfortable with each other. Your laugh in this moment is everything. 😄",
+            6: "Our Titanic moment! You're my Rose, and I promise I'll never let go. This photo captures our playful, romantic side perfectly. 🚢",
+            7: "Alexandria adventures! Exploring new places with you makes every trip an unforgettable journey. You make every destination special. 🏛️",
+            8: "All our travel memories! From weekend getaways to big adventures, every trip with you creates the most beautiful memories. ✈️",
+            9: "New Year's together! Starting the year with you by my side - there's no better way to welcome new beginnings. 🎊",
+            10: "More New Year's celebrations! Every year gets better because I get to celebrate it with you. Here's to many more! 🥳",
+            11: "Our night outs! Whether we're dressed up or just being casual, every evening with you feels like a celebration. 🌃",
+            12: "Our dinner dates! From fancy restaurants to cozy spots, sharing meals with you is one of my favorite things. 🍽️",
+            13: "Making new memories! Every day with you brings new adventures and moments I want to treasure forever. 💕",
+            14: "Our special moments! This photo captures the love and happiness we share. You are my everything, Pragati. 💖"
         };
 
         function showPhotoMessage(photoId) {
