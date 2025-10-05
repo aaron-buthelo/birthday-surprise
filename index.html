@@ -1,298 +1,247 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>For Pragati 💕</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>For Pragati 💕</title>
+  <style>
+    :root{
+      --bg-1:#667eea; /* indigo */
+      --bg-2:#764ba2; /* purple */
+      --paper:#fffaf3; /* warm paper */
+      --paper-edge:#efe7da;
+      --flap:#d9a441; /* gold flap */
+      --flap-dark:#b8872c;
+      --envelope:#f6f6f8;
+      --envelope-edge:#e6e6ea;
+      --heart:#ff4d6d;
+      --shadow:rgba(0,0,0,.22);
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            color: white;
-            text-align: center;
-        }
+    * { box-sizing: border-box; margin:0; padding:0; }
+    html, body { height:100%; }
+    body{
+      font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: radial-gradient(1250px 850px at 20% 10%, rgba(255,255,255,.14) 0%, transparent 50%) ,
+                  linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      color:#fff;
+      display:grid; place-items:center;
+      padding:24px;
+      text-align:center;
+      overflow-x:hidden;
+    }
 
-        .container {
-            max-width: 350px;
-            width: 100%;
-        }
+    .container{ width:min(560px, 92vw); }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            font-weight: 300;
-        }
+    h1{ font-weight:700; letter-spacing:.3px; font-size:clamp(1.6rem, 2.2vw + 1rem, 2.4rem); }
+    .message{ opacity:.92; margin:.6rem auto 1.6rem; line-height:1.6; font-size:clamp(1rem, .5vw + .9rem, 1.1rem); }
 
-        .message {
-            font-size: 1.1rem;
-            margin-bottom: 40px;
-            opacity: 0.9;
-            line-height: 1.5;
-        }
+    /* Envelope Scene */
+    .scene{ perspective:1200px; margin: 18px auto 10px; }
+    .envelope {
+      position: relative;
+      width: clamp(260px, 65vw, 420px);
+      height: clamp(170px, 42vw, 270px);
+      margin-inline:auto;
+      transform-style: preserve-3d;
+      cursor: pointer;
+      user-select:none;
+    }
 
-        .envelope {
-            width: 220px;
-            height: 140px;
-            background: #ffffff;
-            margin: 0 auto 30px;
-            position: relative;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 
-                0 2px 8px rgba(0,0,0,0.08),
-                0 8px 24px rgba(0,0,0,0.12);
-            border: 1px solid #e8e8e8;
-        }
+    /* Base (back) */
+    .env-back{
+      position:absolute; inset:0;
+      border-radius:10px;
+      background: linear-gradient(180deg, var(--envelope) 0%, #f1f1f6 100%);
+      border:1px solid var(--envelope-edge);
+      box-shadow: 0 16px 40px var(--shadow);
+      overflow:hidden;
+    }
 
-        .envelope:hover {
-            transform: translateY(-2px);
-            box-shadow: 
-                0 4px 12px rgba(0,0,0,0.12),
-                0 12px 32px rgba(0,0,0,0.16);
-        }
+    /* Side triangles (back fold) for depth */
+    .env-back::before,
+    .env-back::after{
+      content:""; position:absolute; bottom:0; width:50%; height:60%;
+      background: linear-gradient( to top, #ececf2 0%, transparent 85%);
+    }
+    .env-back::before{ left:0; transform:skewX(18deg) translateX(-6%); }
+    .env-back::after{ right:0; transform:skewX(-18deg) translateX(6%); }
 
-        .envelope:active {
-            transform: translateY(0);
-        }
+    /* Letter */
+    .letter{
+      position:absolute; left:6%; right:6%; bottom:10px;
+      height: calc(100% - 24px);
+      background: linear-gradient(180deg, var(--paper) 0%, #fff 70%);
+      border:1px solid var(--paper-edge);
+      border-radius:8px;
+      transform: translateZ(12px);
+      box-shadow: 0 10px 20px rgba(0,0,0,.12);
+      display:grid; place-items:center;
+      padding:18px;
+    }
+    .letter .seal{
+      position:absolute; bottom:14px; left:50%; transform:translateX(-50%);
+      width:58px; height:58px; border-radius:50%;
+      background: radial-gradient(circle at 35% 30%, #ff7a8f 0%, var(--heart) 55%, #c12e49 100%);
+      box-shadow: inset 0 2px 6px rgba(255,255,255,.6), 0 6px 14px rgba(0,0,0,.2);
+      display:grid; place-items:center; color:#fff; font-size:26px;
+      border:2px solid rgba(255,255,255,.45);
+    }
+    .letter p{ color:#5a4b2e; font-weight:600; font-size:clamp(.95rem, .6vw + .85rem, 1.05rem); }
 
-        .envelope.opening {
-            animation: shake 0.4s ease-in-out;
-        }
+    /* Front pocket */
+    .env-front{
+      position:absolute; inset:0; transform: translateZ(8px);
+      clip-path: polygon(0 100%, 0 40%, 50% 70%, 100% 40%, 100% 100%);
+      background: linear-gradient(180deg, #f8f8fb 0%, #efeff6 100%);
+      border-bottom-left-radius:10px; border-bottom-right-radius:10px;
+      border:1px solid var(--envelope-edge);
+      border-top:none;
+    }
 
-        /* Professional envelope flap */
-        .envelope::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 220px;
-            height: 70px;
-            background: #2c3e50;
-            clip-path: polygon(0 0, 100% 0, 50% 100%);
-            transition: transform 0.6s ease;
-            transform-origin: top center;
-            z-index: 2;
-        }
+    /* Top flap */
+    .flap{
+      position:absolute; left:0; right:0; top:0; height:56%; transform-origin:50% 0%;
+      background: linear-gradient(180deg, var(--flap) 0%, var(--flap-dark) 100%);
+      clip-path: polygon(0 0, 50% 82%, 100% 0, 100% 10%, 0 10%);
+      border-top-left-radius:10px; border-top-right-radius:10px;
+      border:1px solid rgba(0,0,0,.06);
+      filter: drop-shadow(0 10px 12px rgba(0,0,0,.22));
+      transform: rotateX(0deg) translateZ(16px);
+      transition: transform 1s cubic-bezier(.2,.7,.2,1), filter .6s ease;
+    }
 
-        .envelope.opening::before {
-            transform: rotateX(180deg);
-        }
+    /* Wax heart on flap */
+    .flap .wax{
+      position:absolute; bottom:10%; left:50%; transform:translate(-50%, 0);
+      width:54px; height:54px; border-radius:50%;
+      background: radial-gradient(circle at 35% 30%, #ff9fb0 0%, #ff6d88 55%, #d94866 100%);
+      box-shadow: inset 0 2px 6px rgba(255,255,255,.6), 0 6px 14px rgba(0,0,0,.25);
+      display:grid; place-items:center; color:white; font-size:24px;
+      border:2px solid rgba(255,255,255,.45);
+    }
 
-        /* Subtle envelope body lines */
-        .envelope::after {
-            content: '';
-            position: absolute;
-            top: 80px;
-            left: 20px;
-            right: 20px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #f0f0f0, transparent);
-            z-index: 1;
-        }
+    /* Shadow under envelope */
+    .shadow {
+      width: clamp(220px, 60vw, 420px);
+      height: 24px;
+      margin: 26px auto 2px;
+      background: radial-gradient( closest-side, rgba(0,0,0,.35), transparent );
+      filter: blur(8px);
+      opacity:.6;
+    }
 
-        /* Heart content */
-        .envelope-heart {
-            position: absolute;
-            top: 60%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2rem;
-            z-index: 1;
-            transition: all 0.6s ease;
-            opacity: 0.7;
-        }
+    /* Hover/focus states */
+    .envelope:focus-visible { outline: 3px solid rgba(255,255,255,.6); outline-offset: 6px; border-radius:12px; }
+    .hint{ opacity:.8; font-size:.95rem; animation:pulse 2s infinite; }
 
-        .envelope.opening .envelope-heart {
-            transform: translate(-50%, -50%) scale(1.2);
-            opacity: 1;
-        }
+    @keyframes pulse{ 0%,100%{ opacity:.65 } 50%{ opacity:1 } }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-2px); }
-            75% { transform: translateX(2px); }
-        }
+    /* Opening state */
+    .envelope.open .flap{ transform: rotateX(-180deg) translateZ(16px); filter: drop-shadow(0 -6px 12px rgba(0,0,0,.25)); }
+    .envelope.open .letter{ animation: letterUp 1.1s .25s ease-out forwards; }
 
-        .loading-message {
-            opacity: 0;
-            font-size: 1rem;
-            color: white;
-            margin-top: 20px;
-            transition: opacity 0.5s ease;
-        }
+    @keyframes letterUp{
+      0% { transform: translateZ(12px) translateY(0); }
+      60%{ transform: translateZ(12px) translateY(-40%); }
+      100%{ transform: translateZ(12px) translateY(-28%); }
+    }
 
-        .loading-message.show {
-            opacity: 1;
-        }
+    /* Stars backdrop */
+    .stars{ position:fixed; inset:0; pointer-events:none; z-index:-1; }
+    .star{ position:absolute; font-size:1rem; opacity:.6; animation:twinkle 3s infinite; }
+    @keyframes twinkle{ 0%,100%{opacity:.3} 50%{opacity:1} }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-5px); }
-            75% { transform: translateX(5px); }
-        }
-
-        @keyframes glow {
-            0% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
-            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,192,203,0.6); }
-            100% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
-        }
-
-        .click-hint {
-            font-size: 0.9rem;
-            opacity: 0.7;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 0.7; }
-            50% { opacity: 1; }
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .star {
-            position: absolute;
-            color: white;
-            font-size: 0.8rem;
-            animation: twinkle 3s infinite;
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 1; }
-        }
-    </style>
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .envelope, .flap, .letter, .star, .hint{ animation:none !important; transition:none !important; }
+    }
+  </style>
 </head>
 <body>
-    <div class="stars" id="stars"></div>
-    
-    <div class="container">
-        <h1>Something Special for Pragati</h1>
-        <p class="message">A little surprise is waiting for you...</p>
-        <div class="envelope" onclick="openSurprise()">
-            <div class="envelope-heart">💌</div>
+  <div class="stars" id="stars" aria-hidden="true"></div>
+
+  <div class="container">
+    <h1>Something Special for Pragati</h1>
+    <p class="message">A little surprise is waiting for you...</p>
+
+    <div class="scene">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="Open surprise">
+        <div class="env-back"></div>
+        <div class="letter">
+          <p>Open me 💌</p>
+          <div class="seal">❤</div>
         </div>
-        <p class="click-hint">Tap the envelope 💕</p>
-        <p class="loading-message" id="loading-message">Opening your surprise... ✨</p>
+        <div class="env-front"></div>
+        <div class="flap"><div class="wax">💖</div></div>
+      </div>
+      <div class="shadow" aria-hidden="true"></div>
     </div>
 
-    <script>
-        // Reset envelope state on page load and when navigating back
-        function resetEnvelope() {
-            const envelope = document.querySelector('.envelope');
-            const clickHint = document.querySelector('.click-hint');
-            const loadingMessage = document.getElementById('loading-message');
-            
-            envelope.classList.remove('opening');
-            envelope.style.pointerEvents = 'auto';
-            clickHint.style.opacity = '1';
-            loadingMessage.classList.remove('show');
-        }
+    <p class="hint">Tap the envelope 💕</p>
+    <p class="message" id="loading-message" style="opacity:0; transition:opacity .5s ease;">Opening your surprise... ✨</p>
+  </div>
 
-        window.addEventListener('load', resetEnvelope);
-        window.addEventListener('pageshow', resetEnvelope);
-        document.addEventListener('visibilitychange', function() {
-            if (!document.hidden) {
-                resetEnvelope();
-            }
-        });
+  <script>
+    const starsEl = document.getElementById('stars');
+    const envelope = document.getElementById('envelope');
+    const loading = document.getElementById('loading-message');
 
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            for (let i = 0; i < 30; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                star.innerHTML = '✨';
-                star.style.left = Math.random() * 100 + '%';
-                star.style.top = Math.random() * 100 + '%';
-                star.style.animationDelay = Math.random() * 3 + 's';
-                starsContainer.appendChild(star);
-            }
-        }
+    /* Stars */
+    (function createStars(){
+      const count = 36;
+      for(let i=0;i<count;i++){
+        const s = document.createElement('div');
+        s.className = 'star'; s.textContent = '✨';
+        s.style.left = Math.random()*100 + '%';
+        s.style.top = Math.random()*100 + '%';
+        s.style.animationDelay = (Math.random()*3)+'s';
+        starsEl.appendChild(s);
+      }
+    })();
 
-        function openSurprise() {
-            const envelope = document.querySelector('.envelope');
-            const clickHint = document.querySelector('.click-hint');
-            const loadingMessage = document.getElementById('loading-message');
-            
-            // Disable further clicks
-            envelope.style.pointerEvents = 'none';
-            
-            // Start opening animation
-            envelope.classList.add('opening');
-            clickHint.style.opacity = '0';
-            
-            // Show loading message after a short delay
-            setTimeout(() => {
-                loadingMessage.classList.add('show');
-            }, 500);
-            
-            // Create sparkle effects
-            for (let i = 0; i < 15; i++) {
-                setTimeout(() => createSparkle(), i * 100);
-            }
-            
-            // Navigate after animation completes
-            setTimeout(() => {
-                window.location.href = 'birthday.html';
-            }, 2000);
-        }
-        
-        function createSparkle() {
-            const sparkle = document.createElement('div');
-            sparkle.innerHTML = '✨';
-            sparkle.style.position = 'fixed';
-            sparkle.style.left = Math.random() * 100 + 'vw';
-            sparkle.style.top = Math.random() * 100 + 'vh';
-            sparkle.style.fontSize = '1.5rem';
-            sparkle.style.pointerEvents = 'none';
-            sparkle.style.animation = 'sparkleUp 2s ease-out forwards';
-            sparkle.style.zIndex = '1000';
-            
-            document.body.appendChild(sparkle);
-            
-            setTimeout(() => sparkle.remove(), 2000);
-        }
-        
-        // Add sparkle animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes sparkleUp {
-                0% { opacity: 1; transform: translateY(0) scale(0); }
-                50% { opacity: 1; transform: translateY(-30px) scale(1); }
-                100% { opacity: 0; transform: translateY(-60px) scale(0); }
-            }
-        `;
-        document.head.appendChild(style);
+    function openSurprise(){
+      if(envelope.classList.contains('open')) return;
+      envelope.classList.add('open');
+      loading.style.opacity = '1';
+      sparkleBurst();
+      setTimeout(()=>{ window.location.href = 'birthday.html'; }, 1700);
+    }
 
-        createStars();
-        
-        // Force reset envelope immediately and on every page focus
-        setInterval(function() {
-            if (!document.hidden) {
-                resetEnvelope();
-            }
-        }, 100);
-    </script>
+    function resetEnvelope(){
+      envelope.classList.remove('open');
+      loading.style.opacity = '0';
+    }
+
+    /* Sparkles */
+    function sparkleBurst(){
+      for(let i=0;i<16;i++) setTimeout(createSparkle, i*60);
+    }
+
+    function createSparkle(){
+      const sp = document.createElement('div');
+      sp.textContent = '✨';
+      sp.style.position = 'fixed';
+      sp.style.left = (50 + (Math.random()*40-20)) + 'vw';
+      sp.style.top = (50 + (Math.random()*30-15)) + 'vh';
+      sp.style.fontSize = '1.6rem';
+      sp.style.pointerEvents = 'none';
+      sp.style.zIndex = '9999';
+      sp.style.animation = 'sparkleUp 1.6s ease-out forwards';
+      document.body.appendChild(sp);
+      setTimeout(()=> sp.remove(), 1600);
+    }
+
+    const style = document.createElement('style');
+    style.textContent = `@keyframes sparkleUp{0%{opacity:1;transform:translateY(0) scale(.2)}50%{opacity:1;transform:translateY(-28px) scale(1)}100%{opacity:0;transform:translateY(-58px) scale(.2)}}`;
+    document.head.appendChild(style);
+
+    /* Accessibility & lifecycle */
+    window.addEventListener('pageshow', resetEnvelope);
+    document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resetEnvelope(); });
+
+    envelope.addEventListener('click', openSurprise);
+    envelope.addEventListener('keyup', (e)=>{ if(e.key==='Enter' || e.key===' ') openSurprise(); });
+  </script>
 </body>
 </html>
