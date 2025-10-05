@@ -12,7 +12,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #2c3e50, #3498db, #9b59b6);
             min-height: 100vh;
             padding: 20px;
@@ -22,75 +22,64 @@
         }
 
         .letter-container {
-            background: #f8f9fa;
-            max-width: 800px;
-            margin: 0 auto;
-            border-radius: 15px;
+            background: white;
+            max-width: 400px;
+            width: 100%;
+            border-radius: 20px;
             box-shadow: 0 20px 40px rgba(0,0,0,0.3);
             overflow: hidden;
-            position: relative;
         }
 
         .letter-header {
             background: linear-gradient(45deg, #e74c3c, #c0392b);
             color: white;
-            padding: 30px;
+            padding: 25px 20px;
             text-align: center;
         }
 
         .letter-header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
 
         .letter-header p {
-            font-size: 1.2rem;
+            font-size: 1rem;
             opacity: 0.9;
         }
 
         .letter-body {
-            padding: 40px;
-            background: #fff;
-            position: relative;
-        }
-
-        .letter-body::before {
-            content: '';
-            position: absolute;
-            left: 60px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: #e74c3c;
-            opacity: 0.3;
+            padding: 25px 20px;
+            background: white;
         }
 
         .date {
             text-align: right;
             color: #7f8c8d;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             font-style: italic;
+            font-size: 0.9rem;
         }
 
         .salutation {
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             color: #e74c3c;
-            margin-bottom: 20px;
-            font-weight: bold;
+            margin-bottom: 15px;
+            font-weight: 600;
         }
 
         .letter-text {
-            font-size: 1.2rem;
-            line-height: 1.8;
+            font-size: 1rem;
+            line-height: 1.7;
             color: #2c3e50;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             text-align: justify;
         }
 
         .signature {
             text-align: right;
-            margin-top: 40px;
-            font-size: 1.3rem;
+            margin-top: 25px;
+            font-size: 1.1rem;
             color: #e74c3c;
             font-style: italic;
         }
@@ -107,110 +96,27 @@
             background: rgba(255, 255, 255, 0.2);
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 20px;
             cursor: pointer;
-            transition: all 0.3s;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+        .back-btn:active {
+            transform: scale(0.95);
         }
 
         @keyframes blink {
             0%, 50% { border-color: #e74c3c; }
             51%, 100% { border-color: transparent; }
         }
-
-        .heart-decoration {
-            position: absolute;
-            font-size: 1.5rem;
-            color: #e74c3c;
-            opacity: 0.3;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .heart-decoration:nth-child(1) { top: 10%; right: 10%; animation-delay: 0s; }
-        .heart-decoration:nth-child(2) { top: 30%; left: 5%; animation-delay: 1s; }
-        .heart-decoration:nth-child(3) { bottom: 20%; right: 15%; animation-delay: 2s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-            
-            .letter-container {
-                margin: 20px 0;
-            }
-            
-            .letter-header h1 {
-                font-size: 2rem;
-            }
-            
-            .letter-header p {
-                font-size: 1rem;
-            }
-            
-            .letter-body {
-                padding: 25px 20px;
-            }
-            
-            .salutation {
-                font-size: 1.2rem;
-            }
-            
-            .letter-text {
-                font-size: 1rem;
-                line-height: 1.6;
-            }
-            
-            .signature {
-                font-size: 1.1rem;
-                margin-top: 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .letter-header {
-                padding: 20px 15px;
-            }
-            
-            .letter-header h1 {
-                font-size: 1.8rem;
-            }
-            
-            .letter-body {
-                padding: 20px 15px;
-            }
-            
-            .letter-text {
-                font-size: 0.95rem;
-            }
-            
-            .salutation {
-                font-size: 1.1rem;
-            }
-            
-            .signature {
-                font-size: 1rem;
-            }
-        }
     </style>
 </head>
 <body>
+    <button class="back-btn" onclick="window.location.href='birthday.html'">🔙 Back</button>
+    
     <div class="letter-container">
-        <button class="back-btn" onclick="window.location.href='birthday.html'">🔙 Back</button>
-        
-        <div class="heart-decoration">💕</div>
-        <div class="heart-decoration">💖</div>
-        <div class="heart-decoration">💝</div>
-        
         <div class="letter-header">
             <h1>💌 A Letter From My Heart</h1>
             <p>Written with all my love</p>
@@ -241,8 +147,6 @@ I love the way you laugh at my terrible jokes, even when they're not funny. I lo
 
 I love your kindness - how you always think of others first, how you make everyone around you feel special and valued. You have this incredible ability to make the world a brighter place just by being in it.
 
-I love our late-night conversations when we lose track of time talking about everything and nothing. I love how comfortable we are in silence together, and how even ordinary moments feel extraordinary when you're there.
-
 Pragati, you've taught me what it means to love someone completely and unconditionally. You've shown me that home isn't a place - it's a person. And you are my home.
 
 On your birthday, I want you to know that loving you is the easiest thing I've ever done, and being loved by you is the greatest gift I've ever received.
@@ -250,7 +154,7 @@ On your birthday, I want you to know that loving you is the easiest thing I've e
 Happy Birthday, my beautiful Pragati. Here's to many more years of adventures, laughter, and love together.`;
 
         let i = 0;
-        const speed = 50; // typing speed in milliseconds
+        const speed = 30;
 
         function typeWriter() {
             if (i < letterContent.length) {
@@ -258,15 +162,13 @@ Happy Birthday, my beautiful Pragati. Here's to many more years of adventures, l
                 i++;
                 setTimeout(typeWriter, speed);
             } else {
-                // Remove the blinking cursor when done
                 document.getElementById("letter-content").classList.remove("typewriter");
             }
         }
 
-        // Start typing when page loads
         window.onload = function() {
             document.getElementById("letter-content").classList.add("typewriter");
-            setTimeout(typeWriter, 1000); // Start after 1 second
+            setTimeout(typeWriter, 1000);
         };
     </script>
 </body>
