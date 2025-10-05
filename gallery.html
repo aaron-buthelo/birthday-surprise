@@ -117,6 +117,61 @@
         .back-btn:active {
             transform: scale(0.95);
         }
+
+        /* Image Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 60vh;
+            object-fit: contain;
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .modal-message {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 20px;
+            font-size: 1rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .close-modal {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-modal:active {
+            transform: scale(0.95);
+        }
     </style>
 </head>
 <body>
@@ -128,7 +183,7 @@
         </div>
 
         <div class="photo-grid">
-            <div class="photo-card" onclick="showPhotoMessage(1)">
+            <div class="photo-card" onclick="showPhotoModal(1, 'photos/first-date.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/first-date.jpg" alt="Our First Date" onerror="this.style.display='none';">
                     <div class="emoji-fallback">📷</div>
@@ -136,7 +191,7 @@
                 <div class="photo-caption">Our First Date ✨</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(2)">
+            <div class="photo-card" onclick="showPhotoModal(2, 'photos/your-first-bday.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/your-first-bday.jpg" alt="Your First Birthday" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🎂</div>
@@ -144,7 +199,7 @@
                 <div class="photo-caption">Your First Birthday 🎂</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(3)">
+            <div class="photo-card" onclick="showPhotoModal(3, 'photos/first-diwali.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/first-diwali.jpg" alt="First Diwali Together" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🪔</div>
@@ -152,7 +207,7 @@
                 <div class="photo-caption">First Diwali Together 🪔</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(4)">
+            <div class="photo-card" onclick="showPhotoModal(4, 'photos/ramen-dates.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/ramen-dates.jpg" alt="Ramen Dates" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🍜</div>
@@ -160,7 +215,7 @@
                 <div class="photo-caption">Our Ramen Adventures 🍜</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(5)">
+            <div class="photo-card" onclick="showPhotoModal(5, 'photos/more-ramen.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/more-ramen.jpg" alt="More Ramen Fun" onerror="this.style.display='none';">
                     <div class="emoji-fallback">😄</div>
@@ -168,7 +223,7 @@
                 <div class="photo-caption">More Ramen Fun 😄</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(6)">
+            <div class="photo-card" onclick="showPhotoModal(6, 'photos/titanic.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/titanic.jpg" alt="Titanic Moment" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🚢</div>
@@ -176,7 +231,7 @@
                 <div class="photo-caption">Our Titanic Moment 🚢</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(7)">
+            <div class="photo-card" onclick="showPhotoModal(7, 'photos/alexandria.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/alexandria.jpg" alt="Alexandria Trip" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🏛️</div>
@@ -184,7 +239,7 @@
                 <div class="photo-caption">Alexandria Adventures 🏛️</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(8)">
+            <div class="photo-card" onclick="showPhotoModal(8, 'photos/to-trips.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/to-trips.jpg" alt="Our Trips" onerror="this.style.display='none';">
                     <div class="emoji-fallback">✈️</div>
@@ -192,7 +247,7 @@
                 <div class="photo-caption">Travel Memories ✈️</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(9)">
+            <div class="photo-card" onclick="showPhotoModal(9, 'photos/to-new-years.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/to-new-years.jpg" alt="New Year's" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🎊</div>
@@ -200,7 +255,7 @@
                 <div class="photo-caption">New Year's Together 🎊</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(10)">
+            <div class="photo-card" onclick="showPhotoModal(10, 'photos/more-new-years.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/more-new-years.jpg" alt="More New Year's" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🥳</div>
@@ -208,7 +263,7 @@
                 <div class="photo-caption">More New Year's Fun 🥳</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(11)">
+            <div class="photo-card" onclick="showPhotoModal(11, 'photos/night-outs.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/night-outs.jpg" alt="Night Outs" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🌃</div>
@@ -216,7 +271,7 @@
                 <div class="photo-caption">Our Night Outs 🌃</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(12)">
+            <div class="photo-card" onclick="showPhotoModal(12, 'photos/more-dinners.jpg')">
                 <div class="photo-placeholder">
                     <img src="photos/more-dinners.jpg" alt="Dinner Dates" onerror="this.style.display='none';">
                     <div class="emoji-fallback">🍽️</div>
@@ -224,26 +279,35 @@
                 <div class="photo-caption">Dinner Dates 🍽️</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(13)">
+            <div class="photo-card" onclick="showPhotoModal(13, 'photos/more-new.jpg')">
                 <div class="photo-placeholder">
-                    <img src="photos/more-new.jpg" alt="New Memories" onerror="this.style.display='none';">
-                    <div class="emoji-fallback">💕</div>
+                    <img src="photos/more-new.jpg" alt="New Year's Memories" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🎊</div>
                 </div>
-                <div class="photo-caption">Making New Memories 💕</div>
+                <div class="photo-caption">New Year's Memories 🎊</div>
             </div>
 
-            <div class="photo-card" onclick="showPhotoMessage(14)">
+            <div class="photo-card" onclick="showPhotoModal(14, 'photos/to-mine.jpg')">
                 <div class="photo-placeholder">
-                    <img src="photos/to-mine.jpg" alt="Special Moments" onerror="this.style.display='none';">
-                    <div class="emoji-fallback">💖</div>
+                    <img src="photos/to-mine.jpg" alt="My First Birthday With Her" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🎂</div>
                 </div>
-                <div class="photo-caption">Our Special Moments 💖</div>
+                <div class="photo-caption">My First Birthday With Her 🎂</div>
             </div>
         </div>
 
         <button class="back-btn" onclick="window.location.href='birthday.html'">
             🔙 Back to Birthday
         </button>
+    </div>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <img id="modalImage" class="modal-image" src="" alt="">
+            <div id="modalMessage" class="modal-message"></div>
+            <button class="close-modal" onclick="closeModal()">Close</button>
+        </div>
     </div>
 
     <script>
@@ -260,12 +324,30 @@
             10: "More New Year's celebrations! Every year gets better because I get to celebrate it with you. Here's to many more! 🥳",
             11: "Our night outs! Whether we're dressed up or just being casual, every evening with you feels like a celebration. 🌃",
             12: "Our dinner dates! From fancy restaurants to cozy spots, sharing meals with you is one of my favorite things. 🍽️",
-            13: "Making new memories! Every day with you brings new adventures and moments I want to treasure forever. 💕",
-            14: "Our special moments! This photo captures the love and happiness we share. You are my everything, Pragati. 💖"
+            13: "New Year's memories! Another celebration, another year of love and happiness together. You make every moment special. 🎊",
+            14: "My first birthday with you! This was such a special day - having you there to celebrate with me made it perfect. You are my greatest gift. 🎂"
         };
 
-        function showPhotoMessage(photoId) {
-            alert(photoMessages[photoId]);
+        function showPhotoModal(photoId, imageSrc) {
+            const modal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalMessage = document.getElementById('modalMessage');
+            
+            modalImage.src = imageSrc;
+            modalMessage.textContent = photoMessages[photoId];
+            modal.style.display = 'block';
+        }
+
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('imageModal');
+            if (event.target === modal) {
+                closeModal();
+            }
         }
     </script>
 </body>
