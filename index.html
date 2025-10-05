@@ -45,14 +45,12 @@
         .envelope {
             width: 200px;
             height: 120px;
-            background: #fff;
+            background: #f8f8f8;
             margin: 0 auto 30px;
             position: relative;
             cursor: pointer;
             transition: transform 0.3s ease;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            border: 2px solid #ddd;
-            border-radius: 5px;
         }
 
         .envelope:active {
@@ -63,31 +61,41 @@
             animation: shake 0.5s ease-in-out;
         }
 
-        /* Envelope flap */
+        /* Envelope body - back part */
         .envelope::before {
             content: '';
             position: absolute;
-            top: -2px;
-            left: -2px;
-            width: 0;
-            height: 0;
-            border-left: 102px solid transparent;
-            border-right: 102px solid transparent;
-            border-bottom: 70px solid #8B4513;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 120px;
+            background: #f0f0f0;
+            clip-path: polygon(0 30%, 50% 0, 100% 30%, 100% 100%, 0 100%);
+        }
+
+        /* Envelope flap - front part that opens */
+        .envelope::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200px;
+            height: 60px;
+            background: #d4af37;
+            clip-path: polygon(0 100%, 50% 0, 100% 100%);
             transition: transform 0.8s ease;
-            transform-origin: bottom center;
+            transform-origin: top center;
             z-index: 2;
         }
 
-        .envelope.opening::before {
-            transform: rotateX(-180deg);
+        .envelope.opening::after {
+            transform: rotateX(180deg);
         }
 
-        /* Heart */
-        .envelope::after {
-            content: '💌';
+        /* Heart inside */
+        .envelope-content {
             position: absolute;
-            top: 50%;
+            top: 60%;
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 2rem;
@@ -95,7 +103,7 @@
             transition: all 0.8s ease;
         }
 
-        .envelope.opening::after {
+        .envelope.opening .envelope-content {
             transform: translate(-50%, -50%) scale(1.3);
             animation: glow 0.8s ease-in-out;
         }
@@ -164,7 +172,9 @@
     <div class="container">
         <h1>Something Special for Pragati</h1>
         <p class="message">A little surprise is waiting for you...</p>
-        <div class="envelope" onclick="openSurprise()"></div>
+        <div class="envelope" onclick="openSurprise()">
+            <div class="envelope-content">💌</div>
+        </div>
         <p class="click-hint">Tap the envelope 💕</p>
         <p class="loading-message" id="loading-message">Opening your surprise... ✨</p>
     </div>
