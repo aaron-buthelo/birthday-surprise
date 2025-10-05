@@ -43,41 +43,52 @@
         }
 
         .envelope {
-            width: 180px;
+            width: 160px;
             height: 100px;
-            background: #ffffff;
-            border: 2px solid #ccc;
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 8px;
             margin: 0 auto 30px;
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 8px 25px rgba(0,0,0,0.1),
+                inset 0 1px 0 rgba(255,255,255,0.6);
+            border: 1px solid #e0e0e0;
+        }
+
+        .envelope:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
         }
 
         .envelope:active {
-            transform: scale(0.95);
+            transform: scale(0.98);
         }
 
         .envelope.opening {
             animation: shake 0.5s ease-in-out;
         }
 
-        /* Simple triangular flap */
+        /* Envelope seal/flap */
         .envelope::before {
             content: '';
             position: absolute;
             top: -1px;
-            left: -1px;
-            border-left: 91px solid transparent;
-            border-right: 91px solid transparent;
-            border-bottom: 50px solid #8B4513;
-            transition: transform 0.8s ease;
-            transform-origin: bottom;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+            border-radius: 50%;
+            transition: all 0.8s ease;
             z-index: 2;
+            box-shadow: 0 4px 12px rgba(238, 90, 82, 0.3);
         }
 
         .envelope.opening::before {
-            transform: rotateX(-180deg);
+            transform: translateX(-50%) scale(0.1);
+            opacity: 0;
         }
 
         /* Heart inside */
@@ -87,14 +98,44 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 1.8rem;
+            font-size: 2.2rem;
             z-index: 1;
             transition: all 0.8s ease;
+            opacity: 0.3;
         }
 
         .envelope.opening::after {
             transform: translate(-50%, -50%) scale(1.4);
+            opacity: 1;
             animation: glow 0.8s ease-in-out;
+        }
+
+        /* Envelope lines for realism */
+        .envelope-lines {
+            position: absolute;
+            top: 25px;
+            left: 15px;
+            right: 15px;
+            height: 50px;
+        }
+
+        .envelope-lines::before,
+        .envelope-lines::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ddd, transparent);
+        }
+
+        .envelope-lines::before {
+            top: 15px;
+        }
+
+        .envelope-lines::after {
+            top: 30px;
+            width: 70%;
         }
 
         .loading-message {
@@ -161,7 +202,9 @@
     <div class="container">
         <h1>Something Special for Pragati</h1>
         <p class="message">A little surprise is waiting for you...</p>
-        <div class="envelope" onclick="openSurprise()"></div>
+        <div class="envelope" onclick="openSurprise()">
+            <div class="envelope-lines"></div>
+        </div>
         <p class="click-hint">Tap the envelope 💕</p>
         <p class="loading-message" id="loading-message">Opening your surprise... ✨</p>
     </div>
