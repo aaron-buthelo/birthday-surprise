@@ -58,6 +58,10 @@
             transform: scale(0.95);
         }
 
+        .envelope.opening {
+            animation: shake 0.5s ease-in-out;
+        }
+
         .envelope::before {
             content: '';
             position: absolute;
@@ -69,6 +73,11 @@
             border-right: 100px solid transparent;
             border-bottom: 60px solid #D2691E;
             border-radius: 15px 15px 0 0;
+            transition: transform 0.8s ease;
+        }
+
+        .envelope.opening::before {
+            transform: rotateX(180deg);
         }
 
         .envelope::after {
@@ -78,6 +87,36 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 2rem;
+            transition: all 0.8s ease;
+        }
+
+        .envelope.opening::after {
+            transform: translate(-50%, -50%) scale(1.5);
+            animation: glow 0.8s ease-in-out;
+        }
+
+        .loading-message {
+            opacity: 0;
+            font-size: 1rem;
+            color: white;
+            margin-top: 20px;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-message.show {
+            opacity: 1;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+            50% { text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px rgba(255,192,203,0.6); }
+            100% { text-shadow: 0 0 5px rgba(255,255,255,0.5); }
         }
 
         .click-hint {
@@ -122,6 +161,7 @@
         <p class="message">A little surprise is waiting for you...</p>
         <div class="envelope" onclick="openSurprise()"></div>
         <p class="click-hint">Tap the envelope 💕</p>
+        <p class="loading-message" id="loading-message">Opening your surprise... ✨</p>
     </div>
 
     <script>
@@ -139,8 +179,59 @@
         }
 
         function openSurprise() {
-            window.location.href = 'birthday.html';
+            const envelope = document.querySelector('.envelope');
+            const clickHint = document.querySelector('.click-hint');
+            const loadingMessage = document.getElementById('loading-message');
+            
+            // Disable further clicks
+            envelope.style.pointerEvents = 'none';
+            
+            // Start opening animation
+            envelope.classList.add('opening');
+            clickHint.style.opacity = '0';
+            
+            // Show loading message after a short delay
+            setTimeout(() => {
+                loadingMessage.classList.add('show');
+            }, 500);
+            
+            // Create sparkle effects
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => createSparkle(), i * 100);
+            }
+            
+            // Navigate after animation completes
+            setTimeout(() => {
+                window.location.href = 'birthday.html';
+            }, 2000);
         }
+        
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = Math.random() * 100 + 'vw';
+            sparkle.style.top = Math.random() * 100 + 'vh';
+            sparkle.style.fontSize = '1.5rem';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.animation = 'sparkleUp 2s ease-out forwards';
+            sparkle.style.zIndex = '1000';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => sparkle.remove(), 2000);
+        }
+        
+        // Add sparkle animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleUp {
+                0% { opacity: 1; transform: translateY(0) scale(0); }
+                50% { opacity: 1; transform: translateY(-30px) scale(1); }
+                100% { opacity: 0; transform: translateY(-60px) scale(0); }
+            }
+        `;
+        document.head.appendChild(style);
 
         createStars();
     </script>
