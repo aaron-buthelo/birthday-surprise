@@ -1,201 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Letter Just for You 💌</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>A Letter Just for You 💌</title>
+  <style>
+    :root{
+      --bg1:#667eea; --bg2:#764ba2; --accent:#e74c3c; --accent-dark:#c0392b;
+      --paper:#fffaf3; --ink:#2c3e50; --shadow:rgba(0,0,0,.25);
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-            color: white;
-        }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+      background:linear-gradient(135deg,var(--bg1) 0%,var(--bg2) 100%);
+      min-height:100vh;color:white;line-height:1.6;padding:clamp(16px,4vw,24px);
+      display:flex;justify-content:center;align-items:flex-start;overflow-x:hidden;
+    }
 
-        .container {
-            max-width: 400px;
-            margin: 0 auto;
-        }
+    .container{width:min(680px,94vw);margin:auto;}
 
-        .back-btn {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            backdrop-filter: blur(10px);
-            margin-bottom: 20px;
-        }
+    .back-btn{
+      background:rgba(255,255,255,0.2);color:white;border:none;padding:10px 20px;
+      border-radius:20px;cursor:pointer;font-size:.9rem;backdrop-filter:blur(10px);
+      margin-bottom:20px;transition:background .3s ease,transform .15s ease;
+    }
+    .back-btn:hover{background:rgba(255,255,255,0.3)}
+    .back-btn:active{transform:scale(.95)}
 
-        .back-btn:active {
-            transform: scale(0.95);
-        }
+    .letter-card{
+      background:var(--paper);color:var(--ink);border-radius:24px;
+      box-shadow:0 20px 50px var(--shadow);overflow:hidden;
+      animation: fadeIn .8s ease forwards;
+    }
 
-        .letter-card {
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-        }
+    .letter-header{
+      background:linear-gradient(45deg,var(--accent),var(--accent-dark));color:white;
+      padding:clamp(24px,4vw,30px) clamp(16px,4vw,24px);text-align:center;
+    }
 
-        .letter-header {
-            background: linear-gradient(45deg, #e74c3c, #c0392b);
-            color: white;
-            padding: 25px 20px;
-            text-align: center;
-        }
+    .letter-header h1{font-size:clamp(1.6rem,2vw+1rem,2.1rem);font-weight:700;margin-bottom:8px;}
+    .letter-header p{font-size:1rem;opacity:.9}
 
-        .letter-header h1 {
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            font-weight: 600;
-        }
+    .letter-body{padding:clamp(24px,4vw,30px) clamp(20px,5vw,32px);}
+    .date{text-align:right;color:#7f8c8d;margin-bottom:18px;font-style:italic;font-size:.9rem}
+    .salutation{font-size:1.2rem;color:var(--accent);margin-bottom:20px;font-weight:600}
+    .letter-content{font-size:1.05rem;line-height:1.8;color:var(--ink);text-align:left;min-height:120px;position:relative;padding-right:6px}
+    .letter-content p{margin-bottom:18px}
+    .signature{text-align:right;margin-top:28px;font-size:1.1rem;color:var(--accent);font-style:italic}
 
-        .letter-header p {
-            font-size: 1rem;
-            opacity: 0.9;
-        }
+    .typewriter{border-right:2px solid var(--accent);animation:blink 1s infinite}
 
-        .letter-body {
-            padding: 25px 20px;
-            color: #333;
-        }
+    @keyframes blink{0%,50%{border-color:var(--accent)}51%,100%{border-color:transparent}}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
 
-        .date {
-            text-align: right;
-            color: #7f8c8d;
-            margin-bottom: 20px;
-            font-style: italic;
-            font-size: 0.9rem;
-        }
-
-        .salutation {
-            font-size: 1.2rem;
-            color: #e74c3c;
-            margin-bottom: 20px;
-            font-weight: 600;
-        }
-
-        .letter-content {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #2c3e50;
-            margin-bottom: 20px;
-            text-align: left;
-        }
-
-        .letter-content p {
-            margin-bottom: 15px;
-        }
-
-        .signature {
-            text-align: right;
-            margin-top: 25px;
-            font-size: 1.1rem;
-            color: #e74c3c;
-            font-style: italic;
-        }
-
-        .typewriter {
-            border-right: 2px solid #e74c3c;
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { border-color: #e74c3c; }
-            51%, 100% { border-color: transparent; }
-        }
-    </style>
+    @media(max-width:420px){
+      body{padding:18px}
+      .letter-header h1{font-size:1.6rem}
+      .letter-content{font-size:1rem}
+      .signature{font-size:1rem}
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <button class="back-btn" onclick="window.location.href='birthday.html'">🔙 Back</button>
-        
-        <div class="letter-card">
-            <div class="letter-header">
-                <h1>💌 A Letter From My Heart</h1>
-                <p>Written with all my love</p>
-            </div>
-            
-            <div class="letter-body">
-                <div class="date">Today, on your special day</div>
-                
-                <div class="salutation">My Dearest Pragati,</div>
-                
-                <div class="letter-content" id="letter-content">
-                    <!-- Content will be typed here -->
-                </div>
-                
-                <div class="signature">
-                    With all my love,<br>
-                    Your devoted boyfriend 💕
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <button class="back-btn" onclick="window.location.href='birthday.html'">🔙 Back</button>
+
+    <div class="letter-card">
+      <div class="letter-header">
+        <h1>💌 A Letter From My Heart</h1>
+        <p>Written with all my love</p>
+      </div>
+
+      <div class="letter-body">
+        <div class="date">Today, on your special day</div>
+        <div class="salutation">My Dearest Pragati,</div>
+        <div class="letter-content" id="letter-content"></div>
+        <div class="signature">With all my love,<br>Your devoted boyfriend 💕</div>
+      </div>
     </div>
+  </div>
 
-    <script>
-        const letterParagraphs = [
-            "I'm sitting here thinking about how to put into words what you mean to me, and honestly, I don't think any language has enough beautiful words to describe it.",
-            
-            "From the moment you walked into my life, everything changed. You didn't just become my girlfriend - you became my best friend, my confidant, my source of strength, and my greatest joy.",
-            
-            "I love the way you laugh at my terrible jokes, even when they're not funny. I love how you get excited about little things, and how your enthusiasm is so contagious that I find myself getting excited about them too.",
-            
-            "I love your kindness - how you always think of others first, how you make everyone around you feel special and valued. You have this incredible ability to make the world a brighter place just by being in it.",
-            
-            "Pragati, you've taught me what it means to love someone completely and unconditionally. You've shown me that home isn't a place - it's a person. And you are my home.",
-            
-            "On your birthday, I want you to know that loving you is the easiest thing I've ever done, and being loved by you is the greatest gift I've ever received.",
-            
-            "Happy Birthday, Pragati. Here's to many more years of adventures, laughter, and love together."
-        ];
+  <script>
+    const letterParagraphs=[
+      "I'm sitting here thinking about how to put into words what you mean to me, and honestly, I don't think any language has enough beautiful words to describe it.",
+      "From the moment you walked into my life, everything changed. You didn't just become my girlfriend - you became my best friend, my confidant, my source of strength, and my greatest joy.",
+      "I love the way you laugh at my terrible jokes, even when they're not funny. I love how you get excited about little things, and how your enthusiasm is so contagious that I find myself getting excited about them too.",
+      "I love your kindness - how you always think of others first, how you make everyone around you feel special and valued. You have this incredible ability to make the world a brighter place just by being in it.",
+      "Pragati, you've taught me what it means to love someone completely and unconditionally. You've shown me that home isn't a place - it's a person. And you are my home.",
+      "On your birthday, I want you to know that loving you is the easiest thing I've ever done, and being loved by you is the greatest gift I've ever received.",
+      "Happy Birthday, Pragati. Here's to many more years of adventures, laughter, and love together."
+    ];
 
-        let currentParagraph = 0;
-        let currentChar = 0;
-        const speed = 30;
+    let currentParagraph = 0, currentChar = 0; const speed = 28;
 
-        function typeWriter() {
-            const content = document.getElementById("letter-content");
-            
-            if (currentParagraph < letterParagraphs.length) {
-                if (currentChar < letterParagraphs[currentParagraph].length) {
-                    if (currentChar === 0) {
-                        // Start new paragraph
-                        const p = document.createElement('p');
-                        content.appendChild(p);
-                    }
-                    
-                    const currentP = content.lastElementChild;
-                    currentP.innerHTML += letterParagraphs[currentParagraph].charAt(currentChar);
-                    currentChar++;
-                    setTimeout(typeWriter, speed);
-                } else {
-                    // Move to next paragraph
-                    currentParagraph++;
-                    currentChar = 0;
-                    setTimeout(typeWriter, speed * 10); // Pause between paragraphs
-                }
-            } else {
-                // Remove cursor when done
-                content.classList.remove("typewriter");
-            }
+    function typeWriter(){
+      const content = document.getElementById('letter-content');
+      if (!content) return;
+
+      if (currentParagraph < letterParagraphs.length){
+        const text = letterParagraphs[currentParagraph];
+        if (currentChar === 0){
+          const p = document.createElement('p');
+          p.setAttribute('role','paragraph');
+          content.appendChild(p);
         }
+        const p = content.lastElementChild;
+        // Append next character safely
+        p.textContent += text.charAt(currentChar);
+        currentChar++;
+        if (currentChar < text.length){
+          setTimeout(typeWriter, speed);
+        } else {
+          currentParagraph++; currentChar = 0; setTimeout(typeWriter, speed * 10);
+        }
+      } else {
+        document.getElementById('letter-content').classList.remove('typewriter');
+      }
+    }
 
-        window.onload = function() {
-            const content = document.getElementById("letter-content");
-            content.classList.add("typewriter");
-            setTimeout(typeWriter, 1000);
-        };
-    </script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const content = document.getElementById('letter-content');
+      if (!content) return;
+      content.classList.add('typewriter');
+      // Accessibility: announce as it types
+      content.setAttribute('aria-live','polite');
+      setTimeout(typeWriter, 800);
+    });
+  </script>
 </body>
 </html>
