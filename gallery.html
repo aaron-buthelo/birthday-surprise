@@ -89,6 +89,11 @@
             transform: translate(-50%, -50%);
             font-size: 3rem;
             z-index: 1;
+            display: none;
+        }
+
+        .photo-placeholder img[style*="display: none"] + .emoji-fallback {
+            display: block !important;
         }
 
         .photo-caption {
@@ -125,98 +130,112 @@
         <div class="photo-grid">
             <div class="photo-card" onclick="showPhotoMessage(1)">
                 <div class="photo-placeholder">
-                    <img src="photos/first-date.jpg" alt="Our First Date">
+                    <img src="photos/first-date.jpg" alt="Our First Date" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">📷</div>
                 </div>
                 <div class="photo-caption">Our First Date ✨</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(2)">
                 <div class="photo-placeholder">
-                    <img src="photos/your-first-bday.jpg" alt="Your First Birthday">
+                    <img src="photos/your-first-bday.jpg" alt="Your First Birthday" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🎂</div>
                 </div>
                 <div class="photo-caption">Your First Birthday 🎂</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(3)">
                 <div class="photo-placeholder">
-                    <img src="photos/first-diwali.jpg" alt="First Diwali Together">
+                    <img src="photos/first-diwali.jpg" alt="First Diwali Together" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🪔</div>
                 </div>
                 <div class="photo-caption">First Diwali Together 🪔</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(4)">
                 <div class="photo-placeholder">
-                    <img src="photos/ramen-dates.jpg" alt="Ramen Dates">
+                    <img src="photos/ramen-dates.jpg" alt="Ramen Dates" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🍜</div>
                 </div>
                 <div class="photo-caption">Our Ramen Adventures 🍜</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(5)">
                 <div class="photo-placeholder">
-                    <img src="photos/more-ramen.jpg" alt="More Ramen Fun">
+                    <img src="photos/more-ramen.jpg" alt="More Ramen Fun" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">😄</div>
                 </div>
                 <div class="photo-caption">More Ramen Fun 😄</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(6)">
                 <div class="photo-placeholder">
-                    <img src="photos/titanic.jpg" alt="Titanic Moment">
+                    <img src="photos/titanic.jpg" alt="Titanic Moment" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🚢</div>
                 </div>
                 <div class="photo-caption">Our Titanic Moment 🚢</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(7)">
                 <div class="photo-placeholder">
-                    <img src="photos/alexandria.jpg" alt="Alexandria Trip">
+                    <img src="photos/alexandria.jpg" alt="Alexandria Trip" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🏛️</div>
                 </div>
                 <div class="photo-caption">Alexandria Adventures 🏛️</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(8)">
                 <div class="photo-placeholder">
-                    <img src="photos/to-trips.jpg" alt="Our Trips">
+                    <img src="photos/to-trips.jpg" alt="Our Trips" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">✈️</div>
                 </div>
                 <div class="photo-caption">Travel Memories ✈️</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(9)">
                 <div class="photo-placeholder">
-                    <img src="photos/to-new-years.jpg" alt="New Year's">
+                    <img src="photos/to-new-years.jpg" alt="New Year's" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🎊</div>
                 </div>
                 <div class="photo-caption">New Year's Together 🎊</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(10)">
                 <div class="photo-placeholder">
-                    <img src="photos/more-new-years.jpg" alt="More New Year's">
+                    <img src="photos/more-new-years.jpg" alt="More New Year's" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🥳</div>
                 </div>
                 <div class="photo-caption">More New Year's Fun 🥳</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(11)">
                 <div class="photo-placeholder">
-                    <img src="photos/night-outs.jpg" alt="Night Outs">
+                    <img src="photos/night-outs.jpg" alt="Night Outs" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🌃</div>
                 </div>
                 <div class="photo-caption">Our Night Outs 🌃</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(12)">
                 <div class="photo-placeholder">
-                    <img src="photos/more-dinners.jpg" alt="Dinner Dates">
+                    <img src="photos/more-dinners.jpg" alt="Dinner Dates" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">🍽️</div>
                 </div>
                 <div class="photo-caption">Dinner Dates 🍽️</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(13)">
                 <div class="photo-placeholder">
-                    <img src="photos/more-new.jpg" alt="New Memories">
+                    <img src="photos/more-new.jpg" alt="New Memories" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">💕</div>
                 </div>
                 <div class="photo-caption">Making New Memories 💕</div>
             </div>
 
             <div class="photo-card" onclick="showPhotoMessage(14)">
                 <div class="photo-placeholder">
-                    <img src="photos/to-mine.jpg" alt="Special Moments">
+                    <img src="photos/to-mine.jpg" alt="Special Moments" onerror="this.style.display='none';">
+                    <div class="emoji-fallback">💖</div>
                 </div>
                 <div class="photo-caption">Our Special Moments 💖</div>
             </div>
