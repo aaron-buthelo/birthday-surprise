@@ -74,10 +74,11 @@
             border-bottom: 60px solid #D2691E;
             border-radius: 15px 15px 0 0;
             transition: transform 0.8s ease;
+            transform-origin: bottom;
         }
 
         .envelope.opening::before {
-            transform: rotateX(180deg);
+            transform: rotateX(-180deg);
         }
 
         .envelope::after {
